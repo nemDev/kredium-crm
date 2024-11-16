@@ -17,8 +17,15 @@ class AdviserSeeder extends Seeder
     {
         
         DB::table('advisers')->insert([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
+            'name' => 'Joe Doe',
+            'email' => 'joedoe@gmail.com',
+            'password' => Hash::make('password'),
+            'created_at' => now()
+        ]);
+
+        DB::table('advisers')->insert([
+            'name' => 'Tom Doe',
+            'email' => 'tomdoe@gmail.com',
             'password' => Hash::make('password'),
             'created_at' => now()
         ]);
