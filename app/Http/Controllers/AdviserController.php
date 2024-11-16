@@ -82,8 +82,12 @@ class AdviserController extends Controller
             return redirect(route('dashboard'));
         }
         
-        //Validation failed
-        return redirect(route('login'))->with(['error' => 'Wrong credentials. Please check email and password.']);
+        //Validation failed, redirect to login page with message
+        return redirect(route('login'))->with([
+            'error' => 'Wrong credentials. Please check email and password and try again.',
+            'email' => $data['email'],
+            'password' => $data['password'],
+        ]);
     }
 
     public function logout(){
