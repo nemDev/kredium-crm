@@ -1,10 +1,8 @@
 @extends('layout')
 @section('title', 'Kredium CRM | All Clients page')
+
 @section('content')
-    <div class="flex justify-between my-6 bg-gray-100 p-2">
-        <h1 class="text-lg flex items-center">Clients List</h1>
-        <a href="{{route('clients.create')}}" class="bg-indigo-500 rounded py-2 px-6 text-white">Add new client</a>
-    </div>
+    <h1 class="text-2xl text-center my-4 py-4">View all clients page</h1>
 
     @if (session('success'))
     <div class="bg-green-100 border rounded p-3 my-2">

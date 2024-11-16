@@ -1,7 +1,7 @@
 @extends('layout')
 @section('title', 'Kredium CRM | Clients create page')
 @section('content')
-<h1 class="text-center my-4">Create new client form</h1>
+<h1 class="text-2xl text-center my-4 py-4">Create client page</h1>
 <form action="{{ route('clients.store') }}" method="post" class="flex justify-center flex-col w-2/5 mx-auto">
     @csrf
     <!-- First name field -->
@@ -69,7 +69,7 @@
         @enderror
     </div>
     <div class="my-6 w-full text-center">
-        <button type="submit" class="bg-green-100 py-2 px-6 border rounded hover:bg-green-700 hover:text-white">Save</button>
+        <button type="submit" class="bg-emerald-500 py-2 px-6 border rounded hover:bg-emerald-600 hover:text-white text-white">Save</button>
     </div>
 </form>
 @endsection

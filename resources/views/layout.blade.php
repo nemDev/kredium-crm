@@ -31,17 +31,24 @@
                 </div>
                 <div class="flex items-center">
                     @auth
-                        <div class="mx-1">
-                            @if (url()->current() != route('clients.index'))
-                                <a href="{{route('clients.index')}}" class="bg-indigo-500 rounded py-2 px-6 text-white">View all clients</a>
-                            @endif
-                            <a href="/view-report" class="bg-indigo-500 rounded py-2 px-6 text-white">View report</a>
-                        </div>
-                        <form action="{{route('logout')}}" method="post" class="flex mx-1 ">
-                            @csrf
-                            <button type="submit" class="bg-indigo-500 rounded py-2 px-6 text-white">Logout</button>
-                        </form>
-                        
+                        @if (url()->current() == route('clients.index'))
+                            <a href="{{route('dashboard')}}" class="bg-indigo-500 rounded py-2 px-6 text-white hover:bg-indigo-600 mx-1">Go back to dashboard</a>
+                            <a href="{{route('clients.create')}}" class="bg-indigo-500 rounded py-2 px-6 text-white hover:bg-indigo-600 mx-1">Create client</a>
+                        @endif
+
+                        @if (Request::is('clients/create') || Request::is('clients/*'))
+                            <a href="{{route('clients.index')}}" class="bg-indigo-500 rounded py-2 px-6 text-white hover:bg-indigo-600 mx-1">Go back to clients</a>
+                        @endif
+
+                        @if (url()->current() == route('dashboard'))
+                            <a href="{{route('clients.index')}}" class="bg-indigo-500 rounded py-2 px-6 text-white hover:bg-indigo-600 mx-1">View all clients</a>
+                            <a href="/view-report" class="bg-indigo-500 rounded py-2 px-6 text-white hover:bg-indigo-600 mx-1">View report</a>
+                            <form action="{{route('logout')}}" method="post" class="flex mx-1">
+                                @csrf
+                                <button type="submit" class="bg-indigo-500 border rounded py-2 px-6 text-white hover:bg-indigo-600">Logout</button>
+                            </form>
+                        @endif
+
                     @endauth
                     @if(url()->current() == route('login'))
                         <a href="/" class="bg-indigo-500 rounded py-2 px-6 text-white">Home</a>
