@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('cash_loans', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->decimal('amount',8, 2);
-            $table->foreignId('client_id')->constrained();
+            $table->decimal('amount', 15, 2);
+            $table->foreignId('client_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

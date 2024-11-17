@@ -48,8 +48,10 @@
                         @endif
                     </td>
                     <td class="border py-2">
-                        <a href="/clients/{{$client->id}}" class="bg-yellow-600 px-4 py-1 m-2 text-white hover:bg-yellow-500">Edit</a>
-                        <a href="/clients/{{$client->id}}" class="bg-red-600 px-4 py-1 m-2 text-white hover:bg-red-500">Delete</a>
+                        @can('edit-client', $client)
+                            <a href="/clients/{{$client->id}}" class="bg-yellow-600 px-4 py-1 m-2 text-white hover:bg-yellow-500">Edit</a>
+                            <a href="/clients/{{$client->id}}" class="bg-red-600 px-4 py-1 m-2 text-white hover:bg-red-500 deleteButton" data-id="{{$client->id}}" data-name="{{$client->first_name}} {{$client->last_name}}">Delete</a>      
+                        @endcan
                     </td>
                 </tr>  
             @empty
@@ -61,4 +63,48 @@
             @endforelse
         </table>
     </div>
+
+    <div id="deleteModal" class="modal bg-indigo-100 fixed inset-0 flex justify-center items-center hidden">
+        <div class="bg-white p-6 rounded shadow-lg">
+            <h2 class="text-xl font-bold mb-4" id="modalTitle">Are you sure you want to delete?</h2>
+            <form id="deleteForm" action="" method="POST">
+                @csrf
+                @method('DELETE')
+                <div class="flex justify-between">
+                    <button type="button" id="cancelButton" class="bg-gray-400 px-4 py-2 text-white rounded">Cancel</button>
+                    <button type="submit" class="bg-red-600 px-4 py-2 text-white rounded">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var deleteButtons = document.getElementsByClassName('deleteButton')
+        var deleteUrlTemplate = '{{ route('clients.destroy', ['client' => '_CLIENT_ID_']) }}';
+        Array.from(deleteButtons).forEach(element => {
+            element.addEventListener("click", function(e){
+                e.preventDefault();
+                var clientId = element.getAttribute('data-id')
+                var clientName = element.getAttribute('data-name')
+                console.log(parseInt(clientId))
+                // Set modal title
+                var modalTitle = document.getElementById('modalTitle');
+                modalTitle.textContent = 'Are you sure you want to delete ' + clientName + '?';
+
+                // Set form action to the client delete route
+                var deleteForm = document.getElementById('deleteForm');
+                deleteForm.action = deleteUrlTemplate.replace('_CLIENT_ID_', clientId);
+                // Show the modal
+                var modal = document.getElementById('deleteModal');
+                modal.classList.remove('hidden');
+            })
+        });
+
+        // Hide the modal if user clicks cancel
+        var cancelButton = document.getElementById('cancelButton');
+        cancelButton.addEventListener('click', function() {
+            var modal = document.getElementById('deleteModal');
+            modal.classList.add('hidden');
+        });
+    </script>
 @endsection

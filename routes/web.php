@@ -30,5 +30,6 @@ Route::middleware([CheckIfAuthenticated::class])->group(function(){
     Route::post('/clients/create', [ClientController::class, 'store'])->name('clients.store');
     Route::get('/clients/{client}', [ClientController::class, 'edit'])->name('clients.edit');
     Route::post('/clients/{client}', [ClientController::class, 'update'])->name('clients.update');
+    Route::delete('/clients/{client}', [ClientController::class, 'destroy'])->name('clients.destroy');
 });
 

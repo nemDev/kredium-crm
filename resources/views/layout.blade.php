@@ -48,6 +48,10 @@
                                 <button type="submit" class="bg-indigo-500 border rounded py-2 px-6 text-white hover:bg-indigo-600">Logout</button>
                             </form>
                         @endif
+                        
+                        @if (url()->current() == route('home'))
+                            <a href="{{route('dashboard')}}" class="bg-indigo-500 rounded py-2 px-6 text-white hover:bg-indigo-600 mx-1">Go back to dashboard</a>
+                        @endif
 
                     @endauth
                     @if(url()->current() == route('login'))
