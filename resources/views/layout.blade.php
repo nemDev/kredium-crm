@@ -42,14 +42,14 @@
 
                         @if (url()->current() == route('dashboard'))
                             <a href="{{route('clients.index')}}" class="bg-indigo-500 rounded py-2 px-6 text-white hover:bg-indigo-600 mx-1">View all clients</a>
-                            <a href="/view-report" class="bg-indigo-500 rounded py-2 px-6 text-white hover:bg-indigo-600 mx-1">View report</a>
+                            <a href="{{route('report.index')}}" class="bg-indigo-500 rounded py-2 px-6 text-white hover:bg-indigo-600 mx-1">View report</a>
                             <form action="{{route('logout')}}" method="post" class="flex mx-1">
                                 @csrf
                                 <button type="submit" class="bg-indigo-500 border rounded py-2 px-6 text-white hover:bg-indigo-600">Logout</button>
                             </form>
                         @endif
                         
-                        @if (url()->current() == route('home'))
+                        @if (url()->current() == route('home') || url()->current() == route('report.index'))
                             <a href="{{route('dashboard')}}" class="bg-indigo-500 rounded py-2 px-6 text-white hover:bg-indigo-600 mx-1">Go back to dashboard</a>
                         @endif
 
