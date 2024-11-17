@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdviserController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ReportController;
 use App\Http\Middleware\CheckIfAuthenticated;
 
 Route::get('/', function () {
@@ -24,11 +25,16 @@ Route::middleware([CheckIfAuthenticated::class])->group(function(){
         return view('dashboard');
     })->name('dashboard');
 
-    // Clients route
+    // Client routes
     Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
     Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
     Route::post('/clients/create', [ClientController::class, 'store'])->name('clients.store');
     Route::get('/clients/{client}', [ClientController::class, 'edit'])->name('clients.edit');
     Route::post('/clients/{client}', [ClientController::class, 'update'])->name('clients.update');
+    Route::delete('/clients/{client}', [ClientController::class, 'destroy'])->name('clients.destroy');
+
+    //Report routes
+    Route::get('/report', [ReportController::class, 'index'])->name('report.index');
+    Route::post('/report', [ReportController::class, 'export'])->name('report.export');
 });
 

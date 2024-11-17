@@ -1,7 +1,7 @@
 @extends('layout')
 @section('title', 'Kredium CRM | Clients edit page')
 @section('content')
-<h1 class="text-center my-4">Edit client details</h1>
+<h1 class="text-center my-4 text-xl">Edit client details</h1>
 <form action="{{ route('clients.update', $client->id) }}" method="post" class="flex justify-center flex-col w-2/5 mx-auto">
     @csrf
     <!-- First name field -->
@@ -70,17 +70,17 @@
     </div>
 
     <!-- Cash loan -->
-    <h2 class="text-center my-4">Cash loan</h2>
+    <h2 class="text-center my-4 text-xl">Cash loan</h2>
     <!-- Cash loan amount field -->
     <div class="my-2 w-full">
         <input 
             type="text" 
             name="cashLoan[amount]" 
             id="cashLoanAmount" 
-            @class(['border', 'rounded', 'w-full', 'p-2', 'border-red-500' => $errors->has('cashLoanAmount')]) 
+            @class(['border', 'rounded', 'w-full', 'p-2', 'border-red-500' => $errors->has('cashLoan.amount')]) 
             placeholder="Cash Loan Amount" 
             value="{{ $client->cashLoan && $client->cashLoan->amount ? $client->cashLoan->amount : '' }}">
-        @error('cashLoanAmount')
+        @error('cashLoan.amount')
             <span 
                 class="font-light text-red-500">
                 {{$message}}
@@ -88,17 +88,17 @@
         @enderror
     </div>
     <!-- Home loan -->
-    <h2 class="text-center my-4">Home loan</h2>
+    <h2 class="text-center my-4 text-xl">Home loan</h2>
     <!-- Property Value -->
     <div class="my-2 w-full">
         <input 
             type="text" 
-            name="homeLoan[propertValue]" 
+            name="homeLoan[propertyValue]" 
             id="homeLoanPropertyValue" 
-            @class(['border', 'rounded', 'w-full', 'p-2', 'border-red-500' => $errors->has('homeLoan[propertValue]')]) 
-            placeholder="Propert value" 
-            value="{{ $client->cashLoan && $client->cashLoan->property_amount ? $client->cashLoan->property_amount : '' }}">
-        @error('homeLoan[propertValue]')
+            @class(['border', 'rounded', 'w-full', 'p-2', 'border-red-500' => $errors->has('homeLoan.propertyValue')]) 
+            placeholder="Property value" 
+            value="{{ $client->homeLoan && $client->homeLoan->property_amount ? $client->homeLoan->property_amount : '' }}">
+        @error('homeLoan.propertyValue')
             <span 
                 class="font-light text-red-500">
                 {{$message}}
@@ -111,10 +111,10 @@
             type="text" 
             name="homeLoan[downPaymentAmount]" 
             id="homeLoanDownPaymentAmount" 
-            @class(['border', 'rounded', 'w-full', 'p-2', 'border-red-500' => $errors->has('homeLoan[downPaymentAmount]')]) 
-            placeholder="Propert value" 
-            value="{{ $client->homeLoan && $client->homeLoan->down_payment_amount ? $client->cashLoan->down_payment_amount : '' }}">
-        @error('homeLoan[downPaymentAmount]')
+            @class(['border', 'rounded', 'w-full', 'p-2', 'border-red-500' => $errors->has('homeLoan.downPaymentAmount')]) 
+            placeholder="Down payment amount" 
+            value="{{ $client->homeLoan && $client->homeLoan->down_payment_amount ? $client->homeLoan->down_payment_amount : '' }}">
+        @error('homeLoan.downPaymentAmount')
             <span 
                 class="font-light text-red-500">
                 {{$message}}
